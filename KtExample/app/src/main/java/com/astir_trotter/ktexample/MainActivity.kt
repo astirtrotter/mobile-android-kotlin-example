@@ -6,8 +6,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.util.Log
-import com.astir_trotter.ktexample.fragments.NewsFragment
+import com.astir_trotter.ktexample.features.news.NewsFragment
 
 @SuppressLint("PrivateResource")
 class MainActivity : AppCompatActivity() {
@@ -21,11 +20,6 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             changeFragment(NewsFragment())
         }
-
-        // TESTCODE
-        Log.d("AppName", getString(R.string.app_name))
-        Log.d("VersionName", BuildConfig.VERSION_NAME)
-        Log.d("VersionCode", BuildConfig.VERSION_CODE.toString())
     }
 
     fun changeFragment(f: Fragment, cleanStack: Boolean = false) {
