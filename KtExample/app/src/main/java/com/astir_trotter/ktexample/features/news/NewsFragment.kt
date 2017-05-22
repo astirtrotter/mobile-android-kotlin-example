@@ -2,13 +2,12 @@ package com.astir_trotter.ktexample.features.news
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.astir_trotter.ktexample.R
-import com.astir_trotter.ktexample.commons.RedditNewsItem
+import com.astir_trotter.ktexample.commons.RxBaseFragment
 import com.astir_trotter.ktexample.commons.extensions.inflate
 import com.astir_trotter.ktexample.features.news.adapter.NewsAdapter
 import kotlinx.android.synthetic.main.news_fragment.*
@@ -20,7 +19,7 @@ import rx.schedulers.Schedulers
  * @contact         - sugiyama.saori.biz@gmail.com
  * @date            - 5/21/17
  */
-class NewsFragment: Fragment() {
+class NewsFragment: RxBaseFragment() {
 
     private val newsManager by lazy { NewsManager() }
 
@@ -53,6 +52,7 @@ class NewsFragment: Fragment() {
                             Snackbar.make(news_list, e.message ?: "", Snackbar.LENGTH_LONG).show()
                         }
                 )
+        subscriptions.add(subscription)
     }
 
     private fun initAdapter() {
