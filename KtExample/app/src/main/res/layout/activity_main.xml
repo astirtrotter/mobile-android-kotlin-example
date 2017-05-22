@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.astir_trotter.ktexample.ktexample.MainActivity">
+    tools:context="com.astir_trotter.ktexample.ktexample.com.astir_trotter.ktexample.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

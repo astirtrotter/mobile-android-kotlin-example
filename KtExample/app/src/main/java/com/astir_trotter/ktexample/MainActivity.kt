@@ -1,10 +1,11 @@
-package com.astir_trotter.ktexample.ktexample
+package com.astir_trotter.ktexample
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import com.astir_trotter.ktexample.ktexample.R
 import com.astir_trotter.ktexample.ktexample.fragments.NewsFragment
 
 class MainActivity : AppCompatActivity() {
@@ -16,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         if (savedInstanceState == null) {
-            changeFragment(NewsFragment())
+            changeFragment(com.astir_trotter.ktexample.ktexample.fragments.NewsFragment())
         }
     }
 
