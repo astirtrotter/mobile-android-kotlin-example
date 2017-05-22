@@ -11,6 +11,6 @@ import android.view.ViewGroup
  * @date            - 5/22/17
  */
 
-fun ViewGroup.inflate(layoutId: Int): View {
-    return LayoutInflater.from(context).inflate(layoutId, this, false)
+fun ViewGroup.inflate(layoutId: Int, attachToRoot: Boolean = false): View {
+    return LayoutInflater.from(context).inflate(layoutId, this, attachToRoot)
 }
