@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.astir_trotter.ktexample.R
 import com.astir_trotter.ktexample.commons.extensions.inflate
+import com.astir_trotter.ktexample.features.news.adapter.NewsAdapter
 import kotlinx.android.synthetic.main.news_fragment.*
 
 /**
@@ -17,10 +18,6 @@ import kotlinx.android.synthetic.main.news_fragment.*
  */
 class NewsFragment: Fragment() {
 
-    private val newsList by lazy {
-        news_list
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.news_fragment)
     }
@@ -28,7 +25,15 @@ class NewsFragment: Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        newsList.setHasFixedSize(true) // <-- Lazy executed!
-        newsList.layoutManager = LinearLayoutManager(context)
+        news_list.setHasFixedSize(true) // <-- Lazy executed!
+        news_list.layoutManager = LinearLayoutManager(context)
+
+        initAdapter()
+    }
+
+    private fun initAdapter() {
+        if (news_list.adapter == null) {
+            news_list.adapter = NewsAdapter()
+        }
     }
 }
