@@ -13,14 +13,38 @@ import com.astir_trotter.ktexample.commons.adapter.ViewType
 data class RedditNews(
         val after: String,
         val before: String,
-        val news: List<RedditNewsItem>)
+        val news: List<RedditNewsItem>) : Parcelable {
+
+    companion object {
+        @JvmField val CREATOR: Parcelable.Creator<RedditNews> = object : Parcelable.Creator<RedditNews> {
+            override fun createFromParcel(source: Parcel): RedditNews = RedditNews(source)
+            override fun newArray(size: Int): Array<RedditNews?> = arrayOfNulls(size)
+        }
+    }
+
+    protected constructor(parcelIn: Parcel) : this(
+            parcelIn.readString(),
+            parcelIn.readString(),
+            mutableListOf<RedditNewsItem>().apply {
+                parcelIn.readTypedList(this, RedditNewsItem.CREATOR)
+            }
+    )
+
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.writeString(after)
+        dest.writeString(before)
+        dest.writeTypedList(news)
+    }
+
+    override fun describeContents() = 0
+}
 
 data class RedditNewsItem(var author: String,
                           var title: String,
                           var numComments: Int,
                           var created: Long,
                           var thumbnail: String,
-                          var url: String?) : ViewType, Parcelable {
+                          var url: String) : ViewType, Parcelable {
 
     override fun getViewType() = AdapterConstants.NEWS
 
@@ -31,7 +55,14 @@ data class RedditNewsItem(var author: String,
         }
     }
 
-    constructor(source: Parcel) : this(source.readString(), source.readString(), source.readInt(), source.readLong(), source.readString(), source.readString())
+    constructor(source: Parcel) : this(
+            source.readString(),
+            source.readString(),
+            source.readInt(),
+            source.readLong(),
+            source.readString(),
+            source.readString()
+    )
 
     override fun writeToParcel(dest: Parcel?, flags: Int) {
         dest?.writeString(author)
