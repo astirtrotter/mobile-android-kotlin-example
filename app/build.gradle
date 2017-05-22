@@ -12,6 +12,11 @@ android {
     buildToolsVersion "25.0.3"
     flavorDimensions 'buildtype'
 
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+//    }
+
     defaultConfig {
         applicationId "com.astir_trotter.ktexample"
         minSdkVersion 16

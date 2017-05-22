@@ -2,7 +2,6 @@ package com.astir_trotter.ktexample
 
 import android.app.Application
 import android.os.StrictMode
-import com.astir_trotter.ktexample.ktexample.BuildConfig
 
 /**
  * @author          - Saori Sugiyama

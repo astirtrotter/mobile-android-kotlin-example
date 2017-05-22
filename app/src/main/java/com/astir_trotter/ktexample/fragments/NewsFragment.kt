@@ -7,5 +7,5 @@ import android.support.v4.app.Fragment
  * @contact         - sugiyama.saori.biz@gmail.com
  * @date            - 5/21/17
  */
-class NewsFragment: android.support.v4.app.Fragment() {
+class NewsFragment: Fragment() {
 }

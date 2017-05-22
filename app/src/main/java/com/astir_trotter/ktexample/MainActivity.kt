@@ -1,13 +1,15 @@
 package com.astir_trotter.ktexample
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import com.astir_trotter.ktexample.ktexample.R
-import com.astir_trotter.ktexample.ktexample.fragments.NewsFragment
+import android.util.Log
+import com.astir_trotter.ktexample.fragments.NewsFragment
 
+@SuppressLint("PrivateResource")
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,8 +19,13 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         if (savedInstanceState == null) {
-            changeFragment(com.astir_trotter.ktexample.ktexample.fragments.NewsFragment())
+            changeFragment(NewsFragment())
         }
+
+        // TESTCODE
+        Log.d("AppName", getString(R.string.app_name))
+        Log.d("VersionName", BuildConfig.VERSION_NAME)
+        Log.d("VersionCode", BuildConfig.VERSION_CODE.toString())
     }
 
     fun changeFragment(f: Fragment, cleanStack: Boolean = false) {
