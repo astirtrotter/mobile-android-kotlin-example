@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.astir_trotter.ktexample.R
+import com.astir_trotter.ktexample.commons.InfiniteScrollListener
+import com.astir_trotter.ktexample.commons.RedditNews
 import com.astir_trotter.ktexample.commons.RxBaseFragment
 import com.astir_trotter.ktexample.commons.extensions.inflate
 import com.astir_trotter.ktexample.features.news.adapter.NewsAdapter
@@ -21,6 +23,7 @@ import rx.schedulers.Schedulers
  */
 class NewsFragment: RxBaseFragment() {
 
+    private var redditNews: RedditNews? = null
     private val newsManager by lazy { NewsManager() }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -31,7 +34,10 @@ class NewsFragment: RxBaseFragment() {
         super.onActivityCreated(savedInstanceState)
 
         news_list.setHasFixedSize(true) // <-- Lazy executed!
-        news_list.layoutManager = LinearLayoutManager(context)
+        val linearLayout = LinearLayoutManager(context)
+        news_list.layoutManager = linearLayout
+        news_list.clearOnScrollListeners()
+        news_list.addOnScrollListener(InfiniteScrollListener({ requestNews() }, linearLayout))
 
         initAdapter()
 
@@ -41,12 +47,18 @@ class NewsFragment: RxBaseFragment() {
     }
 
     private fun requestNews() {
-        val subscription = newsManager.getNews()
+        /**
+         * first time will send empty string for after parameter.
+         * Next time we will have redditNews set with the next page to
+         * navigate with the after param.
+         */
+        val subscription = newsManager.getNews(redditNews?.after ?: "")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe (
                         { retrievedNews ->
-                            (news_list.adapter as NewsAdapter).addNews(retrievedNews)
+                            redditNews = retrievedNews
+                            (news_list.adapter as NewsAdapter).addNews(retrievedNews.news)
                         },
                         { e ->
                             Snackbar.make(news_list, e.message ?: "", Snackbar.LENGTH_LONG).show()

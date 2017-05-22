@@ -10,6 +10,10 @@ import com.astir_trotter.ktexample.commons.adapter.ViewType
  * @contact         - sugiyama.saori.biz@gmail.com
  * @date            - 5/22/17
  */
+data class RedditNews(
+        val after: String,
+        val before: String,
+        val news: List<RedditNewsItem>)
 
 data class RedditNewsItem(var author: String,
                           var title: String,
