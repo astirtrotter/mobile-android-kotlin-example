@@ -1,15 +1,19 @@
 package com.astir_trotter.ktexample.features.news
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.astir_trotter.ktexample.R
+import com.astir_trotter.ktexample.commons.RedditNewsItem
 import com.astir_trotter.ktexample.commons.extensions.inflate
 import com.astir_trotter.ktexample.features.news.adapter.NewsAdapter
 import kotlinx.android.synthetic.main.news_fragment.*
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
 
 /**
  * @author          - Saori Sugiyama
@@ -17,6 +21,8 @@ import kotlinx.android.synthetic.main.news_fragment.*
  * @date            - 5/21/17
  */
 class NewsFragment: Fragment() {
+
+    private val newsManager by lazy { NewsManager() }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.news_fragment)
@@ -29,6 +35,24 @@ class NewsFragment: Fragment() {
         news_list.layoutManager = LinearLayoutManager(context)
 
         initAdapter()
+
+        if (savedInstanceState == null) {
+            requestNews()
+        }
+    }
+
+    private fun requestNews() {
+        val subscription = newsManager.getNews()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe (
+                        { retrievedNews ->
+                            (news_list.adapter as NewsAdapter).addNews(retrievedNews)
+                        },
+                        { e ->
+                            Snackbar.make(news_list, e.message ?: "", Snackbar.LENGTH_LONG).show()
+                        }
+                )
     }
 
     private fun initAdapter() {
