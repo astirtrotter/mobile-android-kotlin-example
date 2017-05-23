@@ -5,7 +5,7 @@
 - **[RxJava](https://github.com/ReactiveX/RxJava)([RxAndroid](https://github.com/ReactiveX/RxAndroid))**: We will use Observables to decouple the UI thread with our background tasks. In this case to call the API and return this values to the UI.
 - [**Picasso**](https://github.com/square/picasso): Load images from Reddit.
 - **RecyclerView**: We will use the RecyclerView to present the information and also to provide the infinite scroll behaviour.
-- [**Dagger 2**](https://github.com/WeRockStar/Dagger2): Dependency Injection.
+- [**Dagger 2**](https://github.com/google/dagger): Dependency Injection.
 - [**Mockito**](http://site.mockito.org/): Unit Test
 - [**Spek**](http://spekframework.org/): Unit Test (specifically)
 
