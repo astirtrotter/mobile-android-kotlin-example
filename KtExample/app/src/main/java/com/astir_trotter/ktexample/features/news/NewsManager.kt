@@ -1,10 +1,11 @@
 package com.astir_trotter.ktexample.features.news
 
 import com.astir_trotter.ktexample.api.NewsAPI
-import com.astir_trotter.ktexample.api.NewsRestAPI
 import com.astir_trotter.ktexample.commons.RedditNews
 import com.astir_trotter.ktexample.commons.RedditNewsItem
 import rx.Observable
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * News Manager allows you to request news from Reddit API.
@@ -14,7 +15,8 @@ import rx.Observable
  * @date            - 5/22/17
  */
 
-class NewsManager(private val api: NewsAPI = NewsRestAPI()) {
+@Singleton
+class NewsManager @Inject constructor(private val api: NewsAPI) {
 
     /**
      *

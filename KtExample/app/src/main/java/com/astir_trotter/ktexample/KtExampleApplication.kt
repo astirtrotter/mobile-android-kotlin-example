@@ -2,6 +2,9 @@ package com.astir_trotter.ktexample
 
 import android.app.Application
 import android.os.StrictMode
+import com.astir_trotter.ktexample.di.AppModule
+import com.astir_trotter.ktexample.di.DaggerNewsComponent
+import com.astir_trotter.ktexample.di.NewsComponent
 
 /**
  * @author          - Saori Sugiyama
@@ -9,6 +12,10 @@ import android.os.StrictMode
  * @date            - 5/22/17
  */
 class KtExampleApplication : Application() {
+
+    companion object {
+        lateinit var newsComponent: NewsComponent
+    }
 
     override fun onCreate() {
         super.onCreate()
@@ -23,5 +30,11 @@ class KtExampleApplication : Application() {
                     .penaltyLog()
                     .build())
         }
+
+        newsComponent = DaggerNewsComponent.builder()
+                .appModule(AppModule(this))
+                //.newsModule(NewsModule()) Module with empty constructor is implicitly created by dagger.
+                .build()
+
     }
 }
