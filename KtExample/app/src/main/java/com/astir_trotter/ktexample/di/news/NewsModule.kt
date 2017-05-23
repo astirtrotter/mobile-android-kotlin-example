@@ -1,4 +1,4 @@
-package com.astir_trotter.ktexample.di
+package com.astir_trotter.ktexample.di.news
 
 import com.astir_trotter.ktexample.api.NewsAPI
 import com.astir_trotter.ktexample.api.NewsRestAPI

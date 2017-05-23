@@ -3,8 +3,8 @@ package com.astir_trotter.ktexample
 import android.app.Application
 import android.os.StrictMode
 import com.astir_trotter.ktexample.di.AppModule
-import com.astir_trotter.ktexample.di.DaggerNewsComponent
-import com.astir_trotter.ktexample.di.NewsComponent
+import com.astir_trotter.ktexample.di.news.DaggerNewsComponent
+import com.astir_trotter.ktexample.di.news.NewsComponent
 
 /**
  * @author          - Saori Sugiyama
