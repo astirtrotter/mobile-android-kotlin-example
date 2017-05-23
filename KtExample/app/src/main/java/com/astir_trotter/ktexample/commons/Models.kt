@@ -4,6 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.astir_trotter.ktexample.commons.adapter.AdapterConstants
 import com.astir_trotter.ktexample.commons.adapter.ViewType
+import com.astir_trotter.ktexample.commons.extensions.createParcel
 
 /**
  * @author          - Saori Sugiyama
@@ -16,10 +17,8 @@ data class RedditNews(
         val news: List<RedditNewsItem>) : Parcelable {
 
     companion object {
-        @JvmField val CREATOR: Parcelable.Creator<RedditNews> = object : Parcelable.Creator<RedditNews> {
-            override fun createFromParcel(source: Parcel): RedditNews = RedditNews(source)
-            override fun newArray(size: Int): Array<RedditNews?> = arrayOfNulls(size)
-        }
+        @JvmField @Suppress("unused")
+        val CREATOR = createParcel { RedditNews(it) }
     }
 
     protected constructor(parcelIn: Parcel) : this(
@@ -49,10 +48,8 @@ data class RedditNewsItem(var author: String,
     override fun getViewType() = AdapterConstants.NEWS
 
     companion object {
-        @JvmField val CREATOR: Parcelable.Creator<RedditNewsItem> = object : Parcelable.Creator<RedditNewsItem> {
-            override fun createFromParcel(source: Parcel): RedditNewsItem = RedditNewsItem(source)
-            override fun newArray(size: Int): Array<RedditNewsItem?> = arrayOfNulls(size)
-        }
+        @JvmField @Suppress("unused")
+        val CREATOR = createParcel { RedditNewsItem(it) }
     }
 
     constructor(source: Parcel) : this(
