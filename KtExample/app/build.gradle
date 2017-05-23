@@ -93,5 +93,14 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:2.0.2"
     compile "com.squareup.retrofit2:converter-moshi:2.0.0" // JSON -> Java/Kotlin class
 
+    // Tests
     testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:2.1.0'
+    testCompile 'org.jetbrains.spek:spek:1.0.25'
+}
+
+repositories {
+    maven {
+        url "http://repository.jetbrains.com/all"
+    }
 }
