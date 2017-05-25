@@ -9,19 +9,18 @@ apply from: "$project.rootDir/tools/script-pmd.gradle"
 apply from: "$project.rootDir/tools/script-java-code-coverage.gradle"
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
     flavorDimensions 'buildtype'
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility rootProject.ext.sourceCompatibility
+        targetCompatibility rootProject.ext.targetCompatibility
     }
 
     defaultConfig {
-        applicationId "com.astir_trotter.ktexample"
-        minSdkVersion 16
-        targetSdkVersion 25
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
@@ -47,6 +46,8 @@ android {
             versionCode gitVersionCodeTime
             versionName gitVersionName
             applicationId "com.astir_trotter.ktexample.dev"
+
+            setProperty("archivesBaseName", "KtExample-${versionName}-dev")
         }
 
         prod {
@@ -55,6 +56,8 @@ android {
             versionCode gitVersionCode
             versionName gitVersionName
             applicationId "com.astir_trotter.ktexample"
+
+            setProperty("archivesBaseName", "KtExample-${versionName}")
         }
     }
 
@@ -82,8 +85,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    compile "com.android.support:appcompat-v7:$android_support_version"
-    compile "com.android.support:design:$android_support_version"
+    compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+    compile "com.android.support:design:${rootProject.ext.supportLibVersion}"
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
     // Picasso
@@ -106,10 +109,4 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:2.1.0'
     testCompile 'org.jetbrains.spek:spek:1.0.25'
-}
-
-repositories {
-    maven {
-        url "http://repository.jetbrains.com/all"
-    }
 }
