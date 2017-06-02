@@ -3,6 +3,8 @@ package com.astir_trotter.ktexample.di.news
 import com.astir_trotter.ktexample.di.AppModule
 import com.astir_trotter.ktexample.di.NetworkModule
 import com.astir_trotter.ktexample.features.news.NewsFragment
+import dagger.Component
+import javax.inject.Singleton
 
 /**
  * @author          - Saori Sugiyama
@@ -10,8 +12,8 @@ import com.astir_trotter.ktexample.features.news.NewsFragment
  * @date            - 5/23/17
  */
 
-@javax.inject.Singleton
-@dagger.Component(modules = arrayOf(
+@Singleton
+@Component(modules = arrayOf(
         AppModule::class,
         NewsModule::class,
         NetworkModule::class)

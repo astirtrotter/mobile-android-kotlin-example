@@ -7,6 +7,7 @@ import com.astir_trotter.ktexample.commons.RedditNewsItem
 import com.astir_trotter.ktexample.commons.adapter.AdapterConstants
 import com.astir_trotter.ktexample.commons.adapter.ViewType
 import com.astir_trotter.ktexample.commons.adapter.ViewTypeDelegateAdapter
+import java.util.*
 
 /**
  * @author          - Saori Sugiyama
